@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {Card,CardBody,CardImg,CardTitle, CardText } from 'reactstrap';
+import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
 import {PLACES} from '../shared/places';
+import '../App.css';
 
 class TravelCard extends Component{
 
@@ -20,7 +23,7 @@ class TravelCard extends Component{
     renderPlace(place){
         if(place!=null){
             return(
-                <div  className="col-5 col-md-6 ">
+                <div  className="col-5 col-md-10 ">
                         <Card key = {place.id}>
                             <CardTitle align="center">{place.name}</CardTitle>
                             <CardBody>
@@ -54,12 +57,29 @@ class TravelCard extends Component{
             );
         });
 
+        const images = this.state.places.map((place) =>{
+
+            return ( <img src= {place.img} className="sliderimg "/> );
+            
+        });
+        
         return (
-            <div className="container">
+            
+            <div  className="container">
+                
                 <div className="row">
-                    {places}
+                    <AliceCarousel autoPlay autoPlayInterval="3000">
+                        {images}
+                    </AliceCarousel>
+                    <h1>Enjoy The Experience</h1>
+                    
+                    <div className="row">
+                        
+                        {places}
+                    </div>
+                    
                 </div>
-                <div className="row">
+                <div  className="row">
                     {this.renderPlace(this.state.selectedPlace)}
                 </div>
             </div>
