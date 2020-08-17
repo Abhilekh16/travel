@@ -1,6 +1,8 @@
 import React, * as react from 'react';
-import NavBar from './NavBarComponent';
 import TravelCard from './TravelCardComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 class Main extends react.Component{
 
@@ -13,8 +15,14 @@ class Main extends react.Component{
 
         return (
             <div>
-                <NavBar/>
-                <TravelCard/>
+            
+                <Header/>
+                <Switch>
+                    <Route path="/home" component={TravelCard}/>
+                    <Redirect to="/home"/>
+                </Switch>
+                
+                <Footer/>
             </div>
                 
             

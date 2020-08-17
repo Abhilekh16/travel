@@ -1,5 +1,18 @@
+
 .sliderimg{
   width: 100%;
   height: 400px;
   
+}
+.footer{
+  background-color: #D1C4E9;
+  margin:0px auto;
+  padding: 20px 0px 20px 0px;
+}
+
+.underline {
+  border-bottom: 2px solid currentColor;
+}
+.underline-topic {
+  text-decoration: underline;
 }
