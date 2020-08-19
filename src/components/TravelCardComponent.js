@@ -1,98 +1,75 @@
-import React, {Component} from 'react';
-import {Card,CardBody,CardImg,CardTitle, CardText } from 'reactstrap';
+import React from 'react';
+import {Card,CardBody,CardImg,CardTitle } from 'reactstrap';
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
-import {PLACES} from '../shared/places';
-import '../App.css';import 
-{  Link } from "react-router-dom";
+import '../App.css';
+import {  Link } from "react-router-dom";
 
-class TravelCard extends Component{
+function RenderPlace({place, onCLick}){
+        return(
 
-    constructor(props){
-        super(props);
+                    <Card  className=" m-2">
+                        
+                        <CardTitle align="center">{place.name}</CardTitle>
+                        <CardBody>
+                        <Link to={`/home/${place.name}`}>
+                            <CardImg height="100%" src={place.img} alt={place.name}/>
+                            </Link>
+                        </CardBody>
+                        
+                    </Card>
+                
+        );
+    
+   
+}
+const TravelCard = (props) =>{
 
-        this.state = {
+    
+
+       /* this.state = {
             places:PLACES,
             selectedPlace: null
-        };
-    }
+        };*/
+    
 
-    onPlaceSelect(place){
+   /* onPlaceSelect(place){
         this.setState({selectedPlace: place});
-    }
+    }*/
 
-    renderPlace(place){
-        if(place!=null){
-            return(
-                <div  className="col-5 col-md-10 m-3 ">
-                        <Card key = {place.id}>
-                            <CardTitle align="center">{place.name}</CardTitle>
-                            <CardBody>
-                                <CardImg width="100%" src={place.img}/>
-                                <CardText>{place.desc}</CardText>
-                            </CardBody>
-                        </Card>
-                    </div>
-            );
-        }
-        else{
-            return (
-                <div></div>
-            );
-        }
-       
-    }
-    render(){
-        let asia = this.state.places.filter((place) => place.tag === "Asia");
+    
+    
+        
+        let asia = props.places.filter((place) => place.tag === "Asia");
         const asianCountries = asia.map((place)=>{
             return (
                 <div  className="col-12 col-md-4 d-flex min-vh-100">
-                    <Card  className=" m-2" key = {place.id}
-                    onClick = {()=> {this.onPlaceSelect(place)}}>
-
-                        <CardTitle align="center">{place.name}</CardTitle>
-                        <CardBody >
-                            <CardImg height="100%" src={place.img} alt={place.name}/>
-                        </CardBody>
-                    </Card>
+                    <RenderPlace place={place} onClick={props.onClick}/>
                 </div>
                 
             );
         });
-        let europe = this.state.places.filter((place) => place.tag === "Europe");
+        let europe = props.places.filter((place) => place.tag === "Europe");
         const europeanCountries = europe.map((place)=>{
             return (
                 <div  className="col-12 col-md-4 d-flex min-vh-100">
-                    <Card  className=" m-2" key = {place.id}
-                    onClick = {()=> {this.onPlaceSelect(place)}}>
-
-                        <CardTitle align="center">{place.name}</CardTitle>
-                        <CardBody >
-                            <CardImg height="100%" src={place.img} alt={place.name}/>
-                        </CardBody>
-                    </Card>
+                    <RenderPlace place={place} onClick={props.onClick}/>
+                    
                 </div>
                 
             );
         });
-        let africa = this.state.places.filter((place) => place.tag === "Africa");
+        let africa = props.places.filter((place) => place.tag === "Africa");
         const africanCountries = africa.map((place)=>{
             return (
                 <div  className="col-12 col-md-4 d-flex min-vh-100">
-                    <Card  className=" m-2" key = {place.id}
-                    onClick = {()=> {this.onPlaceSelect(place)}}>
-
-                        <CardTitle align="center">{place.name}</CardTitle>
-                        <CardBody >
-                            <CardImg height="100%" src={place.img} alt={place.name}/>
-                        </CardBody>
-                    </Card>
+                    <RenderPlace place={place} onClick={props.onClick}/>
                 </div>
                 
             );
         });
 
-        const images = this.state.places.map((place) =>{
+        const images = props.places.map((place) =>{
 
             return ( <img src= {place.img} className="sliderimg "/> );
             
@@ -121,12 +98,9 @@ class TravelCard extends Component{
                         {africanCountries}
                     </div>
                 </div>
-                <div  className="row">
-                    {this.renderPlace(this.state.selectedPlace)}
-                </div>
+                
             </div>
         );
-    }
 
 }
 
